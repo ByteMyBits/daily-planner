@@ -18,7 +18,7 @@ Overall it was a fairly straight forward project. I ended up generating the plan
 
 ## Finished project  
 
-![Finished site](/assets/images/screenshot)
+![Finished site](/assets/images/screenshot.png)
 
 [Link to site](https://bytemybits.github.io/daily-planner/)
 
