@@ -2,12 +2,15 @@ console.log(moment().format("[It is] HH:mm:ss"));
 
 const officeHours = [9, 10, 11, 12, 13, 14, 15, 16];
 let save;
+// using random text to make the key name unique. Local storage doesn't separate keys/items per subdomain, so other github sites that use storage access same pot
+//which caused errors when trying to access storage items which aren't there because they were deleted by a different site!!
+const storageKey = "redLlama";
 
 renderPage();
 
 function renderPage() {
 
-    // let currentHour = 15;
+    // let currentHour = 14;
     let time = moment().format("HH");
     let currentHour = parseInt(time);
 
@@ -58,9 +61,9 @@ function renderPage() {
         }
         planner.setAttribute("class", "col-10 col-md-9");
         plannerText.setAttribute("class", "form-control text-black border-0 hover");
-        plannerText.setAttribute("id", `"${hour}"`);
+        plannerText.setAttribute("id", `${storageKey}${hour}`);
         plannerText.setAttribute("rows", "3");
-        plannerText.value = localStorage.getItem(hour);
+        plannerText.value = localStorage.getItem(`${storageKey}${hour}`);
         // plannerText.setAttribute("style", "border-radius: 15px")
         planner.append(plannerText);
 
@@ -98,27 +101,24 @@ function renderPage() {
 function saveTextArea() {
 
     let y = save + 9;
-    let z = y.toString();
-    let x = document.getElementById(`"${z}"`);
+    let q = y.toString();
+    let z = storageKey + q;
+    let x = document.getElementById(`${z}`);
     localStorage.setItem(z, (x.value));
 
 }
 
 function clearButton() {
 
-    for (let i = 9; i < 16; i++) {
+    for (let i = 9; i <= 16; i++) {
 
-        let x = document.getElementById(`"${i}"`);
-        localStorage.setItem(i, "");
+        let q = storageKey + i.toString();
+        console.log(q);
+        let x = document.getElementById(`${storageKey}${i}`);
+        localStorage.setItem(q, "");
         x.value = "";
 
     }
 }
 
-
-//future self: trigger event on multiple elements (done on lines 81 to 83) and then get that element's ID
-//or class or index etc.  (done on line 86 for index) that is associated with another element (in this case the textarea
-// and its equivalent save icon);
-
-//instead of having 8 elements... 8 different IDs, 8 lots of "document.getElement.. etc. etc."
 
